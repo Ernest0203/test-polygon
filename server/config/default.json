@@ -1,0 +1,19 @@
+{
+  "db": {
+    "postgres": {
+      "uri": "",
+      "options": {},
+      "baseURL": "",
+      "tempPath": "~/temp/"
+    },
+    "redis": {
+      "uri": "",
+      "options": {},
+      "password": ""
+    }
+  },
+  "jwt": {
+    "secret": "secret",
+    "expiresIn": 86400
+  }
+}
