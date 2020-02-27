@@ -8,6 +8,9 @@
     "install-all": "(npm install && concurrently \"npm run server-install\" \"npm run client-install\")",
     "server": "npm run dev --prefix server",
     "client": "npm run start --prefix client",
+    "migrate": "npm run migrate --prefix server",
+    "migrate:rollback": "npm run migrate:rollback --prefix server",
+    "migrate:rollback:all": "npm run migrate:rollback:all --prefix server",
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
   },
   "repository": {
