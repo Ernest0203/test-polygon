@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from './redux/store';
 import styled, { createGlobalStyle } from 'styled-components';
+import Layout from './containers/Layout';
 
 function App() {
   return (
@@ -14,7 +15,9 @@ function App() {
             <header className="appHeader">
               <h1>Test polygon</h1>
             </header>
-            <main className="appMain"></main>
+            <main className="appMain">
+              <Layout/>
+            </main>
           </AppWrapper>
         </Router>
       </Provider>
@@ -28,6 +31,7 @@ const AppWrapper = styled.div`
   box-shadow: 0 3px 10px rgba(0,0,0, .2);
   background-color: #fff;
   .appHeader {
+    border-bottom: 2px solid #ddd;
     padding: 20px 0;
     h1 {
       text-align: center;
