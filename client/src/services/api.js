@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import config from '../src/config';
+import config from '../config';
 
 // import { store } from 'store'
 // import { receiveLogout } from '../store/actions/auth.actions'
