@@ -1,17 +1,18 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
 import actions from './actions';
-import services from '../../services/services';
+import service from '../../service/service';
 
-function* filesUpload (args) {
-  console.log('test');
-  
+function* filesUpload ({ files }) {
   try {
-    yield put();
+    const data = yield service.filesUpload(files);
+    //yield put();
   } catch {
-    yield put();
+    //yield put();
   }
 };
 
 export default function* filesSaga() {
-  yield all([takeEvery(actions.FILES_UPLOAD, () => console.log('dfdf'))]);
+  yield all([
+    takeEvery(actions.FILES_UPLOAD, filesUpload)
+  ]);
 }

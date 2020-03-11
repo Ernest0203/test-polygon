@@ -1,8 +1,8 @@
 const dev = {
-  apiUrl: 'http://127.0.0.0'
+  apiUrl: 'http://localhost:2000/'
 }
 const prod = {
-  apiUrl: 'test'
+  apiUrl: ''
 }
 
 export default process.env.NODE_ENV === 'production' ? prod : dev;

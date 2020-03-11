@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
 
 import actions from '../redux/files/actions';
 
 const Files = () => {
-  actions.filesUpload()
+  const dispatch = useDispatch();
+  const filesUpload = useCallback(args => dispatch(actions.filesUpload(args)), [dispatch]);
+
   return (
     <FilesWrapper>
       <h2>Files upload/dowload</h2>
-      <Dropzone onDrop={acceptedFiles => {console.log(acceptedFiles); actions.filesUpload()}}>
+      <Dropzone onDrop={acceptedFiles => filesUpload(acceptedFiles) }>
         {({getRootProps, getInputProps}) => (
           <section>
             <div {...getRootProps()}>
