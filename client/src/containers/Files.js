@@ -9,10 +9,16 @@ const Files = () => {
   const dispatch = useDispatch();
   const filesUpload = useCallback(args => dispatch(actions.filesUpload(args)), [dispatch]);
 
+  const test = (files) => {
+    const formData = new FormData();
+    files.map((item) => formData.append(item.name, item))
+    filesUpload(formData);
+  }
+
   return (
     <FilesWrapper>
       <h2>Files upload/dowload</h2>
-      <Dropzone onDrop={acceptedFiles => filesUpload(acceptedFiles) }>
+      <Dropzone onDrop={acceptedFiles => test(acceptedFiles) }>
         {({getRootProps, getInputProps}) => (
           <section>
             <div {...getRootProps()}>
@@ -23,7 +29,7 @@ const Files = () => {
           )}
       </Dropzone>
       <div className="filesContent">
-        
+
       </div>
     </FilesWrapper>     
   )
