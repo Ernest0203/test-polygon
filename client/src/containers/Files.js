@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
@@ -6,19 +6,29 @@ import Dropzone from 'react-dropzone';
 import actions from '../redux/files/actions';
 
 const Files = () => {
+  const filesUrls = useSelector(state => state.files.filesUrls);
   const dispatch = useDispatch();
-  const filesUpload = useCallback(args => dispatch(actions.filesUpload(args)), [dispatch]);
+  const fetchData = useCallback(args => dispatch({type: actions.FETCH_DATA}), [dispatch]);
+  const onFilesUpload = useCallback(args => dispatch(actions.filesUpload(args)), [dispatch]);
+ 
+  useEffect(() => {
+    (async () => await fetchData())();    
+  }, []);
 
-  const test = (files) => {
+  const filesUpload = (files) => {
     const formData = new FormData();
     files.map((item) => formData.append(item.name, item))
-    filesUpload(formData);
-  }
+    onFilesUpload(formData);
+  };
+
+  const filesLinks = filesUrls.map(item => {
+    return <li className="fileItem"><a href={`http://${item.url}`}>{item.name}</a></li>
+  })
 
   return (
     <FilesWrapper>
       <h2>Files upload/dowload</h2>
-      <Dropzone onDrop={acceptedFiles => test(acceptedFiles) }>
+      <Dropzone onDrop={acceptedFiles => filesUpload(acceptedFiles) }>
         {({getRootProps, getInputProps}) => (
           <section>
             <div {...getRootProps()}>
@@ -28,9 +38,10 @@ const Files = () => {
             </section>
           )}
       </Dropzone>
-      <div className="filesContent">
-
-      </div>
+      <ul className="filesList" style={{ display: filesUrls.length > 0 ? 'block' : 'none' }}>
+        <h2 className="filesListTitle">Files List</h2>
+        {filesLinks}
+      </ul>
     </FilesWrapper>     
   )
 }
@@ -45,6 +56,12 @@ const FilesWrapper = styled.div`
     text-align: center;
     padding: 50px 0;
     font-size: 18px;
+  }
+  .fileItem {
+    a {
+      color: #60a1ce;
+      text-decoration: underline;
+    }
   }
 `
 

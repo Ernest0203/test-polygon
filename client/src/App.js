@@ -55,6 +55,10 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
 
+  li {
+    list-style: none;
+  }
+
   code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;

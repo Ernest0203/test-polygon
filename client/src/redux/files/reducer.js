@@ -1,14 +1,16 @@
 import actions from './actions';
 
 const initialState = {
-  files: []
+  filesUrls: []
 };
 
 export default function files(state = initialState, action) {
-  switch (action.type) {
+  const { type, data } = action;
+  switch (type) {
     case actions.FETCH_DATA_SUCCESS:
       return {
         ...state,
+        filesUrls: [...data]
       };
 
     default:

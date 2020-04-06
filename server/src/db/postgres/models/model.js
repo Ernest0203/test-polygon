@@ -3,10 +3,10 @@ import sequelize from '../postgres';
 
 const Model = Sequelize.Model;
 
-export default class Files extends Model {
+export default class Model extends Model {
 }
 
-Files.init({
+Model.init({
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
