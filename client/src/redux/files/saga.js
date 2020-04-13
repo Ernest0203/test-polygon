@@ -5,8 +5,6 @@ import service from '../../service/service';
 function* filesUpload ({ files }) {
   try {
     const data = yield service.filesUpload(files);
-    console.log(data);
-    
     yield put({type: actions.FETCH_DATA_SUCCESS, data: data.data});
   } catch {
     //yield put();

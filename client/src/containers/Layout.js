@@ -45,7 +45,7 @@ const LayoutWrapper = styled.div`
     }
 	}
 	.mainContent {
-		padding: 10px 20px 20px 20px;
+		padding: 20px 20px 20px 20px;
 	}
 `
 

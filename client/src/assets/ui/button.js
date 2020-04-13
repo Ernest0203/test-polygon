@@ -14,6 +14,7 @@ const ButtonWrapper = styled.div`
   .button {
     border: 2px solid #46b156;
     border-radius: 5px;
+    cursor: pointer;
     color: #46b156;
     font-size: 14px;
     font-weight: bold;

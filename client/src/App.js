@@ -40,6 +40,9 @@ const AppWrapper = styled.div`
 `;
 
 const GlobalStyle = createGlobalStyle`
+ * {
+   box-sizing: border-box;
+ }
   body {
     background-color: #eee;
     color: #828684;
