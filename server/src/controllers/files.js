@@ -1,6 +1,5 @@
 import fs from 'fs';
 import config from 'config';
-import { runInNewContext } from 'vm';
 
 const HOST = config.get('server.host');
 const PORT = config.get('server.port');

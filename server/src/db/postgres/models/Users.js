@@ -3,13 +3,23 @@ import sequelize from '../postgres';
 
 const Model = Sequelize.Model;
 
-export default class Model extends Model {
+export default class Users extends Model {
 }
 
-Model.init({
+Users.init({
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+    primaryKey: true
+  },
+  login: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    primaryKey: true
+  },
+  password: {
+    type: Sequelize.STRING,
     allowNull: false,
     primaryKey: true
   },

@@ -1,20 +1,23 @@
 import Files from './Files';
 import Users from './Users';
+import Sockets from './Sockets';
 
 const routes = [
   {
+    link: 'files',
     path: 'files',
     component: Files
   },
   {
-    path: 'users',
-    component: Users
+    link: 'sockets',
+    path: 'sockets',
+    component: Sockets
   },
+  // {
+    // link: 'users',
+  //   path: 'users',
+  //   component: Users
+  // },
 ];
 
-const links = [
-  'files',
-  'users',
-];
-
-export { routes, links };
+export default routes;

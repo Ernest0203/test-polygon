@@ -1,3 +1,4 @@
-import Files from './files';
+import Users from './Users';
+import Roles from './Roles';
 
-export { Files };
+export { Users, Roles };

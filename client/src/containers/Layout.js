@@ -2,11 +2,11 @@ import React from 'react';
 import { Switch, Route, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
-import { routes, links } from './routes';
+import routes from './routes';
 
 const Layout = () => {
-	const linksList = links.map(link => {
-		return <NavLink to={`/${link}`} activeClassName='linkActive'>{link}</NavLink>
+	const linksList = routes.map(route => {
+		return <NavLink to={`/${route.link}`} activeClassName='linkActive'>{route.link}</NavLink>
 	});
 	const routesList = routes.map(route => <Route path={`/${route.path}`} component={route.component}></Route>);
 
