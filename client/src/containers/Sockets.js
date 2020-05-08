@@ -1,21 +1,34 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import config from '../config';
 
-import actions from '../redux/users/actions';
-
 const Sockets = () => {
   const [data, setData] = useState({});
   let cells = {};
+  let ws = useRef(null);
+  
   useEffect(() => setData(cells), []);
+  useEffect(() => {
+    ws.current = new WebSocket(config.socketUrl);
+    ws.current.onopen = () => console.log("ws opened");
+    ws.current.onclose = () => console.log("ws closed");
 
-  const socket = new WebSocket(config.socketUrl);
-  socket.onmessage = e => {
-    const change = JSON.parse(e.data);
-  };
+    return () => ws.current.close();
+  }, []);
+
+  useEffect(() => {
+    if (!ws.current) return;
+    ws.current.onmessage = e => {
+      const newData = {  ...data, ...JSON.parse(e.data) }
+      setData(newData);
+    };
+  }, [data]);
+
   const sendData = e => {
-    socket.send(JSON.stringify({}))
+    const { id, value } = e.target;
+    ws.current.send(JSON.stringify({ [id]: value }));
+    setData({ ...data, [id]: value });
   };
 
   const tableGen = (i) => {
@@ -30,7 +43,7 @@ const Sockets = () => {
       if (k > i) return;
       const row = [(<td>{k}</td>)].concat(letters.map((col) => {
         cells[`${col}${k}`] = '';
-        return <td className="cell"><input id={`${col}${k}`} type="text" onKeyUp={(e) => sendData(e)}/></td>
+        return <td className="cell"><input id={`${col}${k}`} type="text" value={data[`${col}${k}`]} onChange={(e) => sendData(e)}/></td>
       }));
       rows.push(<tr>{row}</tr>);
       createRow(i, k+1);
@@ -70,6 +83,7 @@ const SocketsWrapper = styled.div`
     }
     input {
       height: 30px;
+      padding: 5px;
     }
   }
 `
