@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, Route, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
-import routes from './routes';
+const routes = [
+  {
+		exact: true,
+    link: 'files',
+    path: 'files',
+    component: lazy(() => import('./Files'))
+  },
+  {
+    link: 'sockets',
+    path: 'sockets',
+    component: lazy(() => import('./Sockets'))
+  },
+  {
+    link: 'charts',
+    path: 'charts',
+    component: lazy(() => import('./Charts'))
+  },
+  // {
+    // link: 'users',
+  //   path: 'users',
+  //   component: Users
+  // },
+];
 
 const Layout = () => {
 	const linksList = routes.map(route => {
 		return <NavLink to={`/${route.link}`} activeClassName='linkActive'>{route.link}</NavLink>
 	});
-	const routesList = routes.map(route => <Route path={`/${route.path}`} component={route.component}></Route>);
+	const routesList = routes.map(route => {
+		return <Route path={`/${route.path}`} exact={route.exact} component={route.component}></Route> 
+		}
+	);
 
   return (
     <LayoutWrapper>
@@ -16,9 +41,11 @@ const Layout = () => {
 				{linksList}
 			</nav>
 			<div className="mainContent">
-				<Switch>
-					{routesList}
-				</Switch>
+				<Suspense fallback={() => <p>Loading...</p>}>
+					<Switch>
+						{routesList}
+					</Switch>
+				</Suspense>
 			</div>
     </LayoutWrapper>
   )
