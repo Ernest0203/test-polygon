@@ -27,11 +27,11 @@ const routes = [
 ];
 
 const Layout = () => {
-	const linksList = routes.map(route => {
-		return <NavLink to={`/${route.link}`} activeClassName='linkActive'>{route.link}</NavLink>
+	const linksList = routes.map((route, index) => {
+		return <NavLink key={index} to={`/${route.link}`} activeClassName='linkActive'>{route.link}</NavLink>
 	});
-	const routesList = routes.map(route => {
-		return <Route path={`/${route.path}`} exact={route.exact} component={route.component}></Route> 
+	const routesList = routes.map((route, index) => {
+		return <Route key={index} path={`/${route.path}`} exact={route.exact} component={route.component}></Route> 
 		}
 	);
 

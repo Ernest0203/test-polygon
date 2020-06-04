@@ -13,7 +13,7 @@ const Files = () => {
  
   useEffect(() => {
     (async () => await fetchData())();    
-  }, []);
+  }, [fetchData]);
 
   const filesUpload = (files) => {
     const formData = new FormData();
@@ -21,8 +21,8 @@ const Files = () => {
     onFilesUpload(formData);
   };
 
-  const filesLinks = filesUrls.map(item => {
-    return <li className="fileItem"><a href={`http://${item.url}`}>{item.name}</a></li>
+  const filesLinks = filesUrls.map((item, index) => {
+    return <li key={index} className="fileItem"><a href={`http://${item.url}`}>{item.name}</a></li>
   })
 
   return (

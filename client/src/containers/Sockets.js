@@ -1,14 +1,13 @@
-import React, { useCallback, useEffect, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import config from '../config';
 
 const Sockets = () => {
   const [data, setData] = useState({});
-  let cells = {};
+  let cells = useRef({});
   let ws = useRef(null);
   
-  useEffect(() => setData(cells), []);
+  useEffect(() => setData(cells.current), []);
   useEffect(() => {
     ws.current = new WebSocket(config.socketUrl);
     ws.current.onopen = () => console.log("ws opened");
@@ -42,7 +41,7 @@ const Sockets = () => {
     const createRow = (i, k = 1) => {
       if (k > i) return;
       const row = [(<td>{k}</td>)].concat(letters.map((col) => {
-        cells[`${col}${k}`] = '';
+        cells.current[`${col}${k}`] = '';
         return <td className="cell"><input id={`${col}${k}`} type="text" value={data[`${col}${k}`]} onChange={(e) => sendData(e)}/></td>
       }));
       rows.push(<tr>{row}</tr>);
