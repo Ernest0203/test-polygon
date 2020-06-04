@@ -1,9 +1,9 @@
 {
     "development": {
-      "username": "",
-      "password": "",
-      "database": "",
-      "host": "",
+      "username": "evmlufhv",
+      "password": "eWzDvM1CsnsfLG393IoUyzcgkOziaF1k",
+      "database": "evmlufhv",
+      "host": "balarama.db.elephantsql.com",
       "port": 5432,
       "dialect": "postgres"
     },
